@@ -1,0 +1,6 @@
+# Test Email Times
+01 7 * * * /bin/bash /home/pi/code/email_test/run_email_test.sh
+# By BTC
+15 7 * * 1,3,6 /bin/bash /home/pi/code/crypto/run_coinbase_dca_btc.sh
+# Buy ETH
+45 6 * * 0,2,4,5 /bin/bash /home/pi/code/crypto/run_coinbase_dca_eth.sh

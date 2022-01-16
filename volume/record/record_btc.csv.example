@@ -1,0 +1,11 @@
+type,client_order_id,time,time_run,limit_price,cost,market,tag,stage,filled,factor,hash,is_max
+limit,limit_buy_gembtc_stage1_0x000e118b_2021-10-19:00:30:12,1000000001,1000003403,41355.23,0.0,btcgbp,gembtc,1,False,2.0,0x000e118b,False
+limit,limit_buy_gembtc_stage2_0x000e118b_2021-10-19:06:30:24,1000000002,1000025004,42013.63,0.0,btcgbp,gembtc,2,False,1.5,0x000e118b,False
+limit,limit_buy_gembtc_stage3_0x000e118b_2021-10-19:12:30:24,1000000003,1000046603,42929.42,0.0,btcgbp,gembtc,3,False,1.0,0x000e118b,False
+limit,limit_buy_gembtc_stage4_0x000e118b_2021-10-19:18:30:24,1000000004,1000068203,44952.39,0.0,btcgbp,gembtc,4,False,0.6,0x000e118b,False
+limit,limit_buy_gembtc_stage5_0x000e118b_2021-10-20:00:30:24,1000000005,1000089803,45326.27,0.0,btcgbp,gembtc,5,False,0.5,0x000e118b,False
+limit,limit_buy_gembtc_stage6_0x000e118b_2021-10-20:06:30:25,1000000006,1000011403,45694.74,0.0,btcgbp,gembtc,6,False,0.25,0x000e118b,False
+limit,limit_buy_gembtc_stage7_0x000e118b_2021-10-20:12:30:24,1000000007,1000033003,46418.83,0.0,btcgbp,gembtc,7,False,0.1,0x000e118b,False
+limit,limit_buy_gembtc_stage8_0x000e118b_2021-10-20:18:30:24,1000000008,1000054603,48052.52,0.0,btcgbp,gembtc,8,False,0.05,0x000e118b,True
+limit_buy,limit_buy_gembtc_stage8_0x000e118b_2021-10-20:18:30:24,1000000009,1000076203,48052.52,0.0,btcgbp,gembtc,8,True,0.05,0x000e118b,True
+limit,limit_buy_gembtc_stage1_0x0000b48b_2021-10-21:00:30:16,1000000010,1000076203,40153.93,0.0,btcgbp,gembtc,1,True,3.0,0x0000b48b,False

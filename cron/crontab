@@ -1,0 +1,12 @@
+# Set Up Gemini Run
+# ETH Every 6 hours.
+# This should work out as 3.5 cycles (of 8) per week.
+0 */6 * * * root /bin/bash /code/run_gemini_dca_eth.sh
+
+# BTC Every 12 Hours.
+# This should work out as 1.75 cycles (of 8) per week.
+30 */6 * * * root /bin/bash /code/run_gemini_dca_btc.sh
+# Empty line
+
+# * * * * * root python3 /code/email_test.py >> /var/log/cron_email.log
+# Empty line

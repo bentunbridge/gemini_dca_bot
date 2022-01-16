@@ -127,3 +127,29 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ignore .idea
+.idea
+
+# Ignore ipython checkpoints
+.ipynd_checkpoints/*
+
+# ignore Notebooks Directory used for testing
+/notebooks/
+
+# Don't keep any results
+*.csv
+
+# Don't keep any plots
+*.png
+
+# Don't keep the sync shell scripts.
+sync_cmd.sh
+sync_cmd_out.sh
+
+# Ignore the conf and json configurations
+*.conf
+*.json
+
+# ignore .DS_Store
+*.DS_Store

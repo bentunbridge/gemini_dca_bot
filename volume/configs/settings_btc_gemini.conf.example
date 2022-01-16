@@ -1,0 +1,31 @@
+[setup]
+base_dir = /var/volume
+credentials_file = configs/gemini_credentials.conf
+amount = 10.00
+currency = GBP
+buy_currency = BTC
+market = BTCGBP
+tag = gembtc
+offset = 1
+
+[record]
+record_csv = record/record_btc.csv
+
+[stages]
+granuality = 1m
+gap_factor = 3.
+; factor -> bid - (factor * range in last 24 hours)
+1 = 2.
+2 = 1.5
+3 = 1.0
+4 = 0.6
+5 = 0.5
+6 = 0.25
+7 = 0.1
+8 = 0.05
+
+
+[email]
+DESTINATION = user.name@gmail.com
+SOURCE = user.name.emailforward@gmail.com
+PASS = xxxxxxxxxxxxxxxx

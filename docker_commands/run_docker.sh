@@ -1,0 +1,1 @@
+docker run -v /home/pi/code/dca/volume:/var/volume --restart unless-stopped -d gemini-dca
