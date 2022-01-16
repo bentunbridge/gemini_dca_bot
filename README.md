@@ -1,2 +1,2 @@
-# gemini_dca_bot
+# Gemini DCA Bot
 A Dollar Cost Averaging Bot for Gemini Exchange
