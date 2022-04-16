@@ -8,7 +8,7 @@ The bot is containerised, the container image is created using the `Dockerfile` 
 ## Running the DCA Bot
 
 To run the user will need to enter their credentials and inputs into the following configs.
-We include an example config for each with the additional suffix `.example` e.g. `gemini_credentials.conf` -> `gemini_credentials.conf.example`.
+We include an example config for each with the additional suffix `.example` e.g. `gemini_credentials.conf` &#8594; `gemini_credentials.conf.example`.
 
 The configs are located in the `volume/` directory. This directory will be mounted to the container image and so files in the directory will be accessible from the containerised image. 
 
