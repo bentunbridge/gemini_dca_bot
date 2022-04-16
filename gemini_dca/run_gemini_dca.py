@@ -39,7 +39,7 @@ amount = config["setup"].getfloat("amount")
 currency = config["setup"].get("currency")
 buy_currency = config["setup"].get("buy_currency")
 market = config["setup"].get("market").lower()
-send_to_email = config["email"].get("DESTINATION")
+send_to_email = config["email"].get("DESTINATION", "")
 offset = config["setup"].get("base_dir")
 
 tag = config["setup"].get("tag")
@@ -123,9 +123,10 @@ is_max: {is_max}
 """)
 
 # Outputs #
-plot_names = f"analysis_plots_{time_now.strftime('%Y-%m-%d:%H:%M:%S')}"
-plot_path = os.path.join(base_dir, "plots", f"plot_{time_now.strftime('%Y-%m-%d')}")
-utils.make_new_dir(plot_path, unmask=True)
+if send_to_email is not "":
+    plot_names = f"analysis_plots_{time_now.strftime('%Y-%m-%d:%H:%M:%S')}"
+    plot_path = os.path.join(base_dir, "plots", f"plot_{time_now.strftime('%Y-%m-%d')}")
+    utils.make_new_dir(plot_path, unmask=True)
 
 # Gemini Class
 
@@ -140,10 +141,11 @@ start_balance_str = f"Start Balance: {start_balance} {currency}"
 logger.info(start_balance_str)
 
 if start_balance < amount:
-    error_subject = f"{time_now.strftime('%Y-%m-%d')}: Buy Crypto - {buy_currency} - {run_mode}"
-    error_message = f"Error: Start Balance too low. {start_balance} < {amount}"
-    logger.error(error_message)
-    send_email.send_email_gmail(config, error_subject, error_message, send_to_email)
+    if send_to_email is not "":
+        error_subject = f"{time_now.strftime('%Y-%m-%d')}: Buy Crypto - {buy_currency} - {run_mode}"
+        error_message = f"Error: Start Balance too low. {start_balance} < {amount}"
+        logger.error(error_message)
+        send_email.send_email_gmail(config, error_subject, error_message, send_to_email)
     exit()
 
 # Print Start Buy Balance #
@@ -294,41 +296,44 @@ logger.info(end_buy_balance_str)
 # Send Email Test
 
 if (stage == 1) and last_record:
-    record = pd.read_csv(record_path)
-    hash_record = record[record.hash == last_record.get("hash")]
-    embed_plots = gemini_run.plot_purchase(filename=plot_names,
-                                           path=plot_path,
-                                           product=market,
-                                           record=hash_record)
+    if send_to_email is not "":
+        record = pd.read_csv(record_path)
+        hash_record = record[record.hash == last_record.get("hash")]
+        embed_plots = gemini_run.plot_purchase(filename=plot_names,
+                                               path=plot_path,
+                                               product=market,
+                                               record=hash_record)
 
-    # Find time Now and create Email Message #
-    subject = f"{time_now.strftime('%Y-%m-%d')}: Buy Crypto - {buy_currency} - {run_mode}"
-    message = f"""
-    <b>Time</b>:         {time_now.strftime('%Y-%m-%d %H:%M:%S')}<br>
-    <b>Exchange</b>:       Gemini<br>
-    <b>Amount</b>:       {amount}<br>
-    <b>Currency</b>:     {currency}<br>
-    <b>Buy Currency</b>: {buy_currency}<br>
-    <b>Market</b>:       {market}<br>
-    <b>Run Mode</b>:     {run_mode}<br>
-    <b>Trade Info</b>:     {trade_progress}<br>
-    <b>Start Base Balance</b>:  {start_balance_str}<br>
-    <b>Start Buy Balance</b>:   {start_buy_balance_str}<br>
-    <br>
-    <b>End Base Balance</b>:    {end_balance_str}<br>
-    <b>End Buy Balance</b>:     {end_buy_balance_str}<br>
-    <br>
-    <br>
-    <b>Record</b>:              {hash_record.to_html()}
-    <br>
-    """
-    send_email.send_email_gmail_with_images(config,
-                                            subject,
-                                            message,
-                                            send_to_email,
-                                            attactments=[],
-                                            embedded=embed_plots)
-    logger.info(f"Running Email Test: {time_now}")
+        # Find time Now and create Email Message #
+        subject = f"{time_now.strftime('%Y-%m-%d')}: Buy Crypto - {buy_currency} - {run_mode}"
+        message = f"""
+        <b>Time</b>:         {time_now.strftime('%Y-%m-%d %H:%M:%S')}<br>
+        <b>Exchange</b>:       Gemini<br>
+        <b>Amount</b>:       {amount}<br>
+        <b>Currency</b>:     {currency}<br>
+        <b>Buy Currency</b>: {buy_currency}<br>
+        <b>Market</b>:       {market}<br>
+        <b>Run Mode</b>:     {run_mode}<br>
+        <b>Trade Info</b>:     {trade_progress}<br>
+        <b>Start Base Balance</b>:  {start_balance_str}<br>
+        <b>Start Buy Balance</b>:   {start_buy_balance_str}<br>
+        <br>
+        <b>End Base Balance</b>:    {end_balance_str}<br>
+        <b>End Buy Balance</b>:     {end_buy_balance_str}<br>
+        <br>
+        <br>
+        <b>Record</b>:              {hash_record.to_html()}
+        <br>
+        """
+        send_email.send_email_gmail_with_images(config,
+                                                subject,
+                                                message,
+                                                send_to_email,
+                                                attactments=[],
+                                                embedded=embed_plots)
+        logger.info(f"Running Email Test: {time_now}")
+    else:
+        logger.info(f"No Email Send: {time_now}")
 
 #
 logger.info(f"------------- End {time_now.strftime('%Y-%m-%d %H:%M:%S')} -------------")
