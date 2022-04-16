@@ -41,3 +41,10 @@ We have included a series of bash scripts to run useful docker commands. Docker 
 2) **Run**: To start the container run the `docker_commands/run_docker.sh` script. This will run the docker image until explicitly stopped. This has been setup with the `--restart unless-stopped` option which means that if the system is restarted, the docker will automatically be restarted as well without the need to rerun the `docker_commands/run_docker.sh` script again.
 3) **View/Debug**: To interact with the running docker container, run the `docker_commands/view_container.sh` script. This is a useful way to debug the containerised image. This command will first list the active container images and ask for relevant docker id before launching an interactive session.
 4) **Restart**: If any changes to the code or settings are made, e.g. cron settings, these will not take effect until the container image is restarted. This can be done by running the `docker_commands/restart_container.sh` script. Similarly to the view script, the command line action will list all active container images and prompt for the relevant one to restart. Once restarted the container image will continuously run until explicitly stopped using docker commands e.g. `docker stop $docker_id`.
+
+
+
+## Outputs
+A record of all trades are kept in the `volume/record/` directory. An example of a record is shown in the csv `volume/record/record_btc.csv.example`. The path of the records are set in the settings config under the `record_csv` entry.
+
+All plots which are created and sent via the email monitoring message are also stored in the `volume/plots` directory. If no email send `DESTINATION` is included in the settings config then the plots are also not processed.
